@@ -13,13 +13,7 @@ GameObject:
   - component: {fileID: 2801825046879184388}
   - component: {fileID: 2801825046879184389}
   - component: {fileID: 2801825046879184634}
-  - component: {fileID: 2801825046879184635}
-  - component: {fileID: 2801825046879184632}
   - component: {fileID: 2801825046879184633}
-  - component: {fileID: 2801825046879184638}
-  - component: {fileID: 2801825046879184639}
-  - component: {fileID: 2801825046879184636}
-  - component: {fileID: 202203248221642013}
   m_Layer: 0
   m_Name: Ant
   m_TagString: Untagged
@@ -124,36 +118,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2801825046879184635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2801825046879184637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 926af6918ff44a14fb27c6957bf1cccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  stopdist: 2
-  debugStopSearching: 0
---- !u!114 &2801825046879184632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2801825046879184637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50dcfd7500c17ff46a46f55fbdfa865b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  homeColony: {fileID: 0}
-  TargetWaypoint: {fileID: 7799712418592850740, guid: 7798d7894f9091f4db2d9d19792c7994,
-    type: 3}
 --- !u!114 &2801825046879184633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,58 +132,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numRays: 8
   sightDist: 3
---- !u!114 &2801825046879184638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2801825046879184637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6805ecdf86cec3a4fb6864027fe8024f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2801825046879184639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2801825046879184637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b24f902a70b3d8419a5f64e9ad9dc49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carryObjectSpawnTransform: {fileID: 2801825048259777301}
---- !u!114 &2801825046879184636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2801825046879184637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a88ad7e3417df5458bc2d479118af05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HomeColony: {fileID: 0}
-  hunger: 0
-  hungerTickMax: 50
---- !u!114 &202203248221642013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2801825046879184637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f278722bdd711dc49bb283293f323023, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2801825048259777290
 GameObject:
   m_ObjectHideFlags: 0
