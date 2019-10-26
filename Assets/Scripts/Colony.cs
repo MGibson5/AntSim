@@ -12,17 +12,22 @@ public class Colony : MonoBehaviour
     [SerializeField] private Ant ant;
     [SerializeField] private GameObject antParent;
 
+    private bool growing = false;
+    // starting value for the Lerp
+    static float t = 0.0f;
+    float min = 1;
+    float max = 1.5f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        growing = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        GrowColony();
     }
 
     public int GetColonySize()
@@ -46,6 +51,8 @@ public class Colony : MonoBehaviour
             nextGrowthThreshold *= 2;
             ChangeColonySize(1);
             SpawnNewCreatures(GetColonySize() );
+            growing = true;
+            GrowColony();
         }
         debugFood = food;
     }
@@ -55,6 +62,25 @@ public class Colony : MonoBehaviour
         for( int i = 0; i < amount; i++ )
         {
             Instantiate(ant, gameObject.transform.position, Quaternion.identity, antParent.transform);
+        }
+    }
+
+    private void GrowColony()
+    {
+        if (growing)
+        {
+            float l = Mathf.Lerp(min, max, t);
+            transform.localScale = new Vector3(l, l, l);
+
+            t += .5f * Time.deltaTime;
+            if(t > 1.0f)
+            {
+                min = max;
+
+                max += .5f;
+                t = 0;
+                growing = false;
+            }
         }
     }
 }

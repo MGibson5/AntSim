@@ -33,6 +33,7 @@ public class CollectState : BaseState
             //PICK UP THING
             if (_ant.PickupObject(_ant.Target.gameObject.GetComponent<Food>().pickupModel) == true)
             {
+                _ant.Target.gameObject.GetComponent<Food>().PickUp();
                 _ant.SetTarget(homeColony.transform);
                 return typeof(ReturnState);
             }
