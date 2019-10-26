@@ -35,10 +35,10 @@ public class Sight : MonoBehaviour
 
                 if (Physics.Raycast(transform.position, newVector, out hit, sightDist))
                 {
-                    /*if (hit.collider.GetComponent<Seen>())
+                    if (hit.collider.GetComponent<Food>())
                     {
-                        hit.collider.GetComponent<Seen>().ThisObjectSeen(this.gameObject);
-                    }*/
+                        //hit.collider.GetComponent<Food>().ThisObjectSeen(this.gameObject);
+                    }
                     Debug.DrawRay(transform.position, newVector * sightDist, Color.yellow);
                 }
                 else
