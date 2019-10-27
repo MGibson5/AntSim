@@ -37,11 +37,22 @@ public class WanderState : BaseState
         {
 
         }*/
-        if (_ant.hunger <= _ant.maxHunger / 10)
+        if (_ant.hunger <= _ant.maxHunger / 3) //CAN SET 3 TO A RETURN FOR FOOR SENSITIVITY VARIABLE THAT PLAYER CAN ADJUST
         {
             //return To Colony for food
+            destination = null;
+
             return (typeof(ReturnState));
 
+        }
+        //CHECK ENEMIES (possibly do this along with food but move marked foods inbetween so marked foods is checked before finding new foods
+
+        //CHECK MARKED FOODS
+        if(homeColony.MarkedFoods.Count > 0 && homeColony.MarkedFoods[0] != null )
+        {
+            _ant.SetTarget(homeColony.MarkedFoods[0].transform);
+            destination = null;
+            return (typeof(CollectState));
         }
 
 
@@ -59,7 +70,6 @@ public class WanderState : BaseState
         {
             FindRandomDestination();
         }
-        Debug.Log("WANDER STATE");
         return null;
     }
 

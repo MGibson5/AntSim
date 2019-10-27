@@ -16,6 +16,7 @@ public class Ant : MonoBehaviour
     private GameObject carriedObject = null;
 
     public int hunger { get; private set; }
+    public int debugHunger;
     public int maxHunger { get; private set; } = 10;
 
     private int hungerTick;
@@ -29,6 +30,11 @@ public class Ant : MonoBehaviour
         TimeTickSystem.OnTick += TimeTickSystem_OnTick;
     }
 
+    private void Update()
+    {
+        debugHunger = hunger;
+    }
+
     private void TimeTickSystem_OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         hungerTick++;
@@ -36,13 +42,16 @@ public class Ant : MonoBehaviour
         {
             hungerTick = 0;
             hunger -= 1;
-            if (hunger <= maxHunger / 10)
+            if (hunger <= maxHunger / 2)
             {
                 //return To Colony for food
+               // if(gameObject!= null)
+                    //GetComponent<StateMachine>().SwitchStateManualy(typeof(ReturnState));
+
             }
             if (hunger <= 0)
             {
-                if (gameObject != null)
+                if (gameObject != null) { }
                     Destroy(gameObject);
             }
         }
@@ -80,7 +89,6 @@ public class Ant : MonoBehaviour
 
     public void DepositObject()
     {
-        Debug.Log("DEPOSIT");
         if (carryingObject == true)
         {
             Destroy(carriedObject);

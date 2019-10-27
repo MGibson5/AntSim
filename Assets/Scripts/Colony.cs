@@ -28,11 +28,15 @@ public class Colony : MonoBehaviour
     [SerializeField] private TextMeshProUGUI popUI;
 
     public List<Ant> Ants { get; set; }
+    public List<Food> MarkedFoods;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Ants = new List<Ant>();
+        MarkedFoods = new List<Food>();
+
         SpawnNewCreatures(1);
         popUI.text = Ants.Count.ToString();
 
@@ -72,7 +76,9 @@ public class Colony : MonoBehaviour
     void Update()
     {
         debugFood = food;
+        Debug.Log(MarkedFoods.Count);
         //popUI.text = Ants.Count.ToString();
+        MarkedFoods.RemoveAll(item => item == null); //MOVE THIS SOMEPLACE ELSE
 
         ChangeColonyScale(true);
     }
@@ -160,6 +166,34 @@ public class Colony : MonoBehaviour
                     growing = false;
                 }
             }
+        }
+    }
+
+    public void AddMarkedFood(Food _markedFood)
+    {
+        if (!MarkedFoods.Contains(_markedFood))
+        {
+            MarkedFoods.Add(_markedFood);
+            Debug.Log(_markedFood.gameObject.name + " marked");
+        }
+    }
+
+    public void RemoveMarkedFood(Food _markedFood)
+    {
+
+        if (MarkedFoods.Contains(_markedFood))
+        {
+            MarkedFoods.Remove(_markedFood);
+            MarkedFoods.RemoveAll(item => item == null);
+
+            //Debug.Log(MarkedFoods[MarkedFoods.Count]);
+            //MarkedFoods.Sort();
+            //Debug.Log(_markedFood.gameObject.name + " unmarked");
+            /*if(MarkedFoods.Count == 1)
+            {
+                Debug.Log("NULL");
+                MarkedFoods.Clear();
+            }*/
         }
     }
 }

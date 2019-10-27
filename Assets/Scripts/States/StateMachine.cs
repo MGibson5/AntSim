@@ -36,4 +36,12 @@ public class StateMachine : MonoBehaviour
         CurrentState = _availableStates[nextState]; //set current state to new state
         OnStateChanged?.Invoke(CurrentState); //listens for state changes and can react if needbe
     }
+
+    public void SwitchStateManualy(Type nextState)
+    {
+        if (nextState != null && nextState != CurrentState?.GetType())
+        {
+            SwitchToNewState(nextState);
+        }
+    }
 }
