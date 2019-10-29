@@ -16,6 +16,9 @@ public class GameSettings : MonoBehaviour
     [SerializeField] private float collectDist = .5f;
     public static float CollectDist => Instance.collectDist;
 
+    [SerializeField] private float antSpawnRate = 2f;
+    public static float AntSpawnRate => Instance.antSpawnRate;
+
     public static GameSettings Instance{get; private set;}
 
     private void Awake()
@@ -28,5 +31,21 @@ public class GameSettings : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    public void ChangeSightDist(float _change)
+    {
+        sightDist = _change+1;
+    }
+
+    public void ChangeSpeed(float _change)
+    {
+        antSpeed = _change;
+    }
+
+    public void ChangeSpawnRate(float _change)
+    {
+        Debug.Log(_change);
+        antSpawnRate = _change + 1;
     }
 }

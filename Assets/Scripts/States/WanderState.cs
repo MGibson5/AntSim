@@ -106,7 +106,7 @@ public class WanderState : BaseState
 
                 RaycastHit hit;
 
-                if (Physics.Raycast(transform.position, newVector, out hit, GameSettings.SightDist))
+                if (Physics.Raycast(transform.position, newVector, out hit, (GameSettings.SightDist + 1)))
                 {
                     if (hit.collider.GetComponent<Food>())
                     {
@@ -114,11 +114,11 @@ public class WanderState : BaseState
 
                         return spotted.transform;
                     }
-                    Debug.DrawRay(transform.position, newVector * GameSettings.SightDist, Color.yellow);
+                    Debug.DrawRay(transform.position, newVector * (GameSettings.SightDist + 1), Color.yellow);
                 }
                 else
                 {
-                    Debug.DrawRay(transform.position, newVector * GameSettings.SightDist, Color.white);
+                    Debug.DrawRay(transform.position, newVector * (GameSettings.SightDist + 1), Color.white);
 
                 }
 

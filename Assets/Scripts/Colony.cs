@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 public class Colony : MonoBehaviour
 {
+    public string ColonyName { get; private set; }
     [SerializeField]private int size = 1;
     public int food { get; private set;}
     [SerializeField] int debugFood;
@@ -34,6 +35,8 @@ public class Colony : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ColonyName = ("Colony");
+
         Ants = new List<Ant>();
         MarkedFoods = new List<Food>();
 
@@ -76,7 +79,6 @@ public class Colony : MonoBehaviour
     void Update()
     {
         debugFood = food;
-        Debug.Log(MarkedFoods.Count);
         //popUI.text = Ants.Count.ToString();
         MarkedFoods.RemoveAll(item => item == null); //MOVE THIS SOMEPLACE ELSE
 

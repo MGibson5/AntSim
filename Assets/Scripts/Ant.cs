@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.AI;
+using UnityEngine.AI;
 
 public class Ant : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class Ant : MonoBehaviour
 
     private int hungerTick;
     [SerializeField] private int hungerTickMax = 50;
+    private NavMeshAgent agent;
 
     private void Awake()
     {
@@ -28,6 +31,8 @@ public class Ant : MonoBehaviour
         InitialiseStateMachine();
         hunger = maxHunger;
         TimeTickSystem.OnTick += TimeTickSystem_OnTick;
+        agent = gameObject.GetComponent<NavMeshAgent>();
+
     }
 
     private void Update()
@@ -37,6 +42,8 @@ public class Ant : MonoBehaviour
 
     private void TimeTickSystem_OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
     {
+        ChangeSpeed();
+
         hungerTick++;
         if (hungerTick >= hungerTickMax)
         {
@@ -54,6 +61,7 @@ public class Ant : MonoBehaviour
                 if (gameObject != null) { }
                     Destroy(gameObject);
             }
+
         }
     }
 
@@ -101,5 +109,12 @@ public class Ant : MonoBehaviour
     public void GainFood()
     {
         hunger = maxHunger;
+    }
+
+    public void ChangeSpeed()
+    {
+        agent.speed = GameSettings.AntSpeed;
+        
+
     }
 }

@@ -18,4 +18,6 @@ public abstract class OnClicked : MonoBehaviour
 
     public abstract void Clicked();
 
+    public abstract void ClickOff();
+
 }
