@@ -11,7 +11,7 @@ public class WanderState : BaseState
     private float stopDistance = 1.0f;
     private Ant _ant;
     private float wanderRadius;
-    private Colony homeColony;
+    //private Colony homeColony;
     private Quaternion stepAngle = Quaternion.AngleAxis(5.0f, Vector3.up);
     private NavMeshAgent agent;
 
@@ -23,7 +23,7 @@ public class WanderState : BaseState
     public WanderState(Ant ant) : base(ant.gameObject) //passes ant gameobject to base state
     {
         _ant = ant;
-        homeColony = _ant.HomeColony;
+        //homeColony = _ant.HomeColony;
         agent = _ant.GetComponent<NavMeshAgent>();
 
     }
@@ -48,9 +48,9 @@ public class WanderState : BaseState
         //CHECK ENEMIES (possibly do this along with food but move marked foods inbetween so marked foods is checked before finding new foods
 
         //CHECK MARKED FOODS
-        if(homeColony.MarkedFoods.Count > 0 && homeColony.MarkedFoods[0] != null )
+        if(_ant.HomeColony.MarkedFoods.Count > 0 && _ant.HomeColony.MarkedFoods[0] != null )
         {
-            _ant.SetTarget(homeColony.MarkedFoods[0].transform);
+            _ant.SetTarget(_ant.HomeColony.MarkedFoods[0].transform);
             destination = null;
             return (typeof(CollectState));
         }
@@ -133,7 +133,7 @@ public class WanderState : BaseState
 
     void FindRandomDestination()
     {
-        wanderRadius = 5 * homeColony.GetColonySize();
+        wanderRadius = 5 * _ant.HomeColony.GetColonySize();
         
         float x = 0;
         float y = 0;
@@ -158,7 +158,7 @@ public class WanderState : BaseState
             y = Random.Range(-5, (wanderRadius * -1));
         }
 
-        Vector3 newSearchPos = homeColony.transform.position + new Vector3(x, 0, y);
+        Vector3 newSearchPos = _ant.HomeColony.transform.position + new Vector3(x, 0, y);
         agent.destination = newSearchPos;
         destination = newSearchPos;
 

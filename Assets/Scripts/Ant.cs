@@ -11,6 +11,7 @@ public class Ant : MonoBehaviour
     public StateMachine StateMachine => GetComponent<StateMachine>();
 
     public Colony HomeColony { get; set; }
+    public Colony debugColony;
 
     [SerializeField] private Transform PickUpObjectTransform;
 
@@ -38,6 +39,7 @@ public class Ant : MonoBehaviour
     private void Update()
     {
         debugHunger = hunger;
+        debugColony = HomeColony;
     }
 
     private void TimeTickSystem_OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
@@ -113,7 +115,8 @@ public class Ant : MonoBehaviour
 
     public void ChangeSpeed()
     {
-        agent.speed = GameSettings.AntSpeed;
+        if(agent)
+            agent.speed = GameSettings.AntSpeed;
         
 
     }

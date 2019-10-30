@@ -35,10 +35,10 @@ public class CollectState : BaseState
             {
                 _ant.Target.gameObject.GetComponent<Food>().PickUp(homeColony);
                 //mark food in colony marked food list
-                homeColony.AddMarkedFood(_ant.Target.gameObject.GetComponent<Food>());
+                _ant.HomeColony.AddMarkedFood(_ant.Target.gameObject.GetComponent<Food>());
 
                 //set target home
-                _ant.SetTarget(homeColony.transform);
+                _ant.SetTarget(_ant.HomeColony.transform);
                 
                 return typeof(ReturnState);
             }
