@@ -5,6 +5,8 @@ using UnityEngine;
 using TMPro;
 public class Colony : MonoBehaviour
 {
+    public string Name;
+    public int ID;
     public string ColonyName { get; private set; }
     [SerializeField]private int size = 1;
     public int food { get; private set;}
@@ -53,7 +55,10 @@ public class Colony : MonoBehaviour
     private void TimeTickSystem_OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         hungerTick++;
-        if (hungerTick >= hungerTickMax)
+        Debug.Log("-1 food every " + (hungerTickMax - ((int)(GameSettings.AntSpeed) + (int)(GameSettings.SightDist) + (int)(GameSettings.AntSpawnRate)) * .2) + " seconds");
+        Debug.Log("-" + (300 / (hungerTickMax - ((int)(GameSettings.AntSpeed) + (int)(GameSettings.SightDist) + (int)(GameSettings.AntSpawnRate))) + " per minute"));
+
+        if (hungerTick >= hungerTickMax - ((int)(GameSettings.AntSpeed) + (int)(GameSettings.SightDist) + (int)(GameSettings.AntSpawnRate))) //Uses gamesettings to decrease hunger tick rate
         {
             hungerTick = 0;
             food -= 1;
@@ -127,6 +132,7 @@ public class Colony : MonoBehaviour
         {
             Ant _tempAnt = Instantiate(ant, gameObject.transform.position, Quaternion.identity, antParent.transform);
             Ants.Add(_tempAnt);
+            _tempAnt.HomeColony = (this);
             popUI.text = Ants.Count.ToString();
         }
     }
