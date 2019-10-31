@@ -7,6 +7,7 @@ public class Colony : MonoBehaviour
 {
     public string Name;
     public int ID;
+    public Color AntColour;
     public string ColonyName { get; private set; }
     [SerializeField]private int size = 1;
     public int food { get; private set;}
@@ -39,6 +40,7 @@ public class Colony : MonoBehaviour
     {
         ColonyName = ("Colony");
 
+        AntColour = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
         Ants = new List<Ant>();
         MarkedFoods = new List<Food>();
 
@@ -55,8 +57,8 @@ public class Colony : MonoBehaviour
     private void TimeTickSystem_OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
     {
         hungerTick++;
-        Debug.Log("-1 food every " + (hungerTickMax - ((int)(GameSettings.AntSpeed) + (int)(GameSettings.SightDist) + (int)(GameSettings.AntSpawnRate)) * .2) + " seconds");
-        Debug.Log("-" + (300 / (hungerTickMax - ((int)(GameSettings.AntSpeed) + (int)(GameSettings.SightDist) + (int)(GameSettings.AntSpawnRate))) + " per minute"));
+        //Debug.Log("-1 food every " + (hungerTickMax - ((int)(GameSettings.AntSpeed) + (int)(GameSettings.SightDist) + (int)(GameSettings.AntSpawnRate)) * .2) + " seconds");
+        //Debug.Log("-" + (300 / (hungerTickMax - ((int)(GameSettings.AntSpeed) + (int)(GameSettings.SightDist) + (int)(GameSettings.AntSpawnRate))) + " per minute"));
 
         if (hungerTick >= hungerTickMax - ((int)(GameSettings.AntSpeed) + (int)(GameSettings.SightDist) + (int)(GameSettings.AntSpawnRate))) //Uses gamesettings to decrease hunger tick rate
         {
@@ -131,8 +133,10 @@ public class Colony : MonoBehaviour
         for( int i = 0; i < amount; i++ )
         {
             Ant _tempAnt = Instantiate(ant, gameObject.transform.position, Quaternion.identity, antParent.transform);
+            _tempAnt.AntColour = AntColour;
             Ants.Add(_tempAnt);
             _tempAnt.HomeColony = (this);
+            _tempAnt.gameObject.SetActive(true);
             popUI.text = Ants.Count.ToString();
         }
     }

@@ -33,6 +33,15 @@ public class Food : MonoBehaviour
             ColoniesWithRef.Add(_homeColony);
         }
 
+        foreach (Colony colony in ColoniesWithRef)
+        {
+            if(colony != _homeColony)
+            {
+                // reduce opinion of _homecolony by -1
+                FindObjectOfType<ColonyManager>().ChangeOpinion(colony.ID, _homeColony.ID, -1);
+            }
+        }
+
         if (food <= 0)
         {
             foreach (Colony colony in ColoniesWithRef)

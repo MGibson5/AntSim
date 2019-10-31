@@ -33,7 +33,7 @@ public class CollectState : BaseState
             //PICK UP THING
             if (_ant.PickupObject(_ant.Target.gameObject.GetComponent<Food>().pickupModel) == true)
             {
-                _ant.Target.gameObject.GetComponent<Food>().PickUp(homeColony);
+                _ant.Target.gameObject.GetComponent<Food>().PickUp(_ant.HomeColony);
                 //mark food in colony marked food list
                 _ant.HomeColony.AddMarkedFood(_ant.Target.gameObject.GetComponent<Food>());
 

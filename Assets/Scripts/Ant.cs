@@ -25,14 +25,19 @@ public class Ant : MonoBehaviour
     private int hungerTick;
     [SerializeField] private int hungerTickMax = 50;
     private NavMeshAgent agent;
+    public Color AntColour;
 
     private void Awake()
     {
-        HomeColony = FindObjectOfType<Colony>(); //TEMP FIND COLONY (Should be set when ant spawned)
+        if (HomeColony == null) {
+            HomeColony = FindObjectOfType<Colony>(); //TEMP FIND COLONY (Should be set when ant spawned)
+        }
         InitialiseStateMachine();
         hunger = maxHunger;
         TimeTickSystem.OnTick += TimeTickSystem_OnTick;
         agent = gameObject.GetComponent<NavMeshAgent>();
+
+        gameObject.GetComponent<Renderer>().material.SetColor("_Color", AntColour);
 
     }
 
@@ -120,4 +125,6 @@ public class Ant : MonoBehaviour
         
 
     }
+
+    
 }

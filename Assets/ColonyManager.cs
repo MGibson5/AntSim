@@ -27,6 +27,7 @@ public class ColonyManager : MonoBehaviour
     public void ChangeOpinion(int _1stColonyID, int _2ndColonyID, int _changeBy)
     {
         ColoniesOpinionTable[_1stColonyID, _2ndColonyID] += _changeBy;
+        Debug.Log("Colony " + _1stColonyID + "'s opinion of Colony" + _2ndColonyID + " has changed by " + _changeBy + ". making opinion = " + ColoniesOpinionTable[_1stColonyID, _2ndColonyID]);
     }
 
     public int GetOpinion(int _1stColonyID, int _2ndColonyID)
