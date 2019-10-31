@@ -27,11 +27,14 @@ public class Ant : MonoBehaviour
     private NavMeshAgent agent;
     public Color AntColour;
 
+    public ColonyManager Colony_Manager;
+
     private void Awake()
     {
         if (HomeColony == null) {
             HomeColony = FindObjectOfType<Colony>(); //TEMP FIND COLONY (Should be set when ant spawned)
         }
+        Colony_Manager = FindObjectOfType<ColonyManager>();
         InitialiseStateMachine();
         hunger = maxHunger;
         TimeTickSystem.OnTick += TimeTickSystem_OnTick;
@@ -65,8 +68,10 @@ public class Ant : MonoBehaviour
             }
             if (hunger <= 0)
             {
-                if (gameObject != null) { }
+                if (gameObject != null)
+                {
                     Destroy(gameObject);
+                }
             }
 
         }
@@ -78,7 +83,8 @@ public class Ant : MonoBehaviour
         {
             {typeof(WanderState), new WanderState(ant: this) }, //reson for like this is to reuse the same State. We also pass in the ant so its for a specific ant. Add all states other bellow
             {typeof(ReturnState), new ReturnState(ant: this) },
-            {typeof(CollectState), new CollectState(ant: this)}
+            {typeof(CollectState), new CollectState(ant: this)},
+            {typeof(AttackState), new AttackState(ant: this)}
 
         };
 
@@ -99,6 +105,11 @@ public class Ant : MonoBehaviour
             carryingObject = true;
         }
         return carryingObject;
+
+    }
+
+    public void Attack(Ant _enemy)
+    {
 
     }
 

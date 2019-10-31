@@ -18,11 +18,12 @@ public class WanderState : BaseState
     private Vector3 direction;
     private Quaternion startingAngle = Quaternion.AngleAxis(-60.0f, Vector3.up);
 
-
+    public ColonyManager ColonyManager;
     //constructor
     public WanderState(Ant ant) : base(ant.gameObject) //passes ant gameobject to base state
     {
         _ant = ant;
+        ColonyManager = _ant.Colony_Manager;
         //homeColony = _ant.HomeColony;
         agent = _ant.GetComponent<NavMeshAgent>();
 
@@ -46,9 +47,16 @@ public class WanderState : BaseState
 
         }
         //CHECK ENEMIES (possibly do this along with food but move marked foods inbetween so marked foods is checked before finding new foods
+        var target = CheckForTarget();
 
+        if (target != null && target.GetComponent<Ant>())
+        {
+            _ant.SetTarget(target);
+            destination = null;
+            return (typeof(AttackState));
+        }
         //CHECK MARKED FOODS
-        if(_ant.HomeColony.MarkedFoods.Count > 0 && _ant.HomeColony.MarkedFoods[0] != null )
+        if (_ant.HomeColony.MarkedFoods.Count > 0 && _ant.HomeColony.MarkedFoods[0] != null )
         {
             _ant.SetTarget(_ant.HomeColony.MarkedFoods[0].transform);
             destination = null;
@@ -56,10 +64,9 @@ public class WanderState : BaseState
         }
 
 
-        var foodTarget = CheckForTarget(); 
-        if(foodTarget != null)
+        if(target != null && target.GetComponent<Food>())
         {
-            _ant.SetTarget(foodTarget);
+            _ant.SetTarget(target);
             destination = null;
             return (typeof(CollectState));
         }
@@ -108,12 +115,26 @@ public class WanderState : BaseState
 
                 if (Physics.Raycast(transform.position, newVector, out hit, (GameSettings.SightDist + 1)))
                 {
-                    if (hit.collider.GetComponent<Food>())
+                    if (hit.collider.GetComponent<Ant>())
+                    {
+                        Debug.Log(ColonyManager.GetComponent<ColonyManager>().GetOpinion(_ant.GetComponent<Ant>().HomeColony.ID, hit.collider.GetComponent<Ant>().HomeColony.ID));
+                        if (hit.collider.GetComponent<Ant>().HomeColony.ID != _ant.GetComponent<Ant>().HomeColony.ID)
+                        {
+                            if (ColonyManager.GetComponent<ColonyManager>().GetOpinion(_ant.GetComponent<Ant>().HomeColony.ID, hit.collider.GetComponent<Ant>().HomeColony.ID) <= 25)
+                            {
+                                var spotted = hit.collider.GetComponent<Ant>();
+
+                                return spotted.transform;
+                            }
+                        }
+                    }
+                    else if (hit.collider.GetComponent<Food>())
                     {
                         var spotted = hit.collider.GetComponent<Food>();
 
                         return spotted.transform;
                     }
+                    
                     Debug.DrawRay(transform.position, newVector * (GameSettings.SightDist + 1), Color.yellow);
                 }
                 else

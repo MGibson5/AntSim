@@ -146,8 +146,9 @@ MonoBehaviour:
   debugColony: {fileID: 0}
   PickUpObjectTransform: {fileID: 3677970208430835870}
   debugHunger: 0
-  hungerTickMax: 50
+  hungerTickMax: 1
   AntColour: {r: 0, g: 0, b: 0, a: 0}
+  Colony_Manager: {fileID: 0}
 --- !u!1 &3677970207189544519
 GameObject:
   m_ObjectHideFlags: 0
