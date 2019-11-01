@@ -26,7 +26,7 @@ public class AttackState : BaseState
         {
             if (_ant.Target)
             {
-                //PICK UP THING
+                
                 if (_ant.Target.gameObject.GetComponent<Ant>())
                 {
                     Ant _enemy = _ant.Target.gameObject.GetComponent<Ant>();
@@ -43,6 +43,9 @@ public class AttackState : BaseState
             }
             
         }
+
+        if (_ant.Target.gameObject.active == false)
+        { return typeof(WanderState); }
         return null;
     }
 

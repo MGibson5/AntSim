@@ -20,15 +20,30 @@ public class Ant : MonoBehaviour
 
     public int hunger { get; private set; }
     public int debugHunger;
+
     public int maxHunger { get; private set; } = 10;
+
+
+    public int hp { get; private set; }
+    [SerializeField] private int debugHP;
+    public int maxHP { get; private set; } = 10;
 
     private int hungerTick;
     [SerializeField] private int hungerTickMax = 50;
+
+    private int attackTick;
+    [SerializeField] private int attackTickMax = 10;
+
     private NavMeshAgent agent;
     public Color AntColour;
 
+    public int Strength = 1;
+    public int Defence = 1;
+
     public ColonyManager Colony_Manager;
 
+    public bool Attacking = false;
+    private Ant enemy;
     private void Awake()
     {
         if (HomeColony == null) {
@@ -37,6 +52,7 @@ public class Ant : MonoBehaviour
         Colony_Manager = FindObjectOfType<ColonyManager>();
         InitialiseStateMachine();
         hunger = maxHunger;
+        hp = maxHP;
         TimeTickSystem.OnTick += TimeTickSystem_OnTick;
         agent = gameObject.GetComponent<NavMeshAgent>();
 
@@ -48,6 +64,7 @@ public class Ant : MonoBehaviour
     {
         debugHunger = hunger;
         debugColony = HomeColony;
+        debugHP = hp;
     }
 
     private void TimeTickSystem_OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
@@ -55,6 +72,8 @@ public class Ant : MonoBehaviour
         ChangeSpeed();
 
         hungerTick++;
+        attackTick++;
+
         if (hungerTick >= hungerTickMax)
         {
             hungerTick = 0;
@@ -70,10 +89,26 @@ public class Ant : MonoBehaviour
             {
                 if (gameObject != null)
                 {
-                    Destroy(gameObject);
+                    gameObject.SetActive(false);
+                    //Destroy(gameObject);
                 }
             }
-
+        }
+        if(attackTick >= attackTickMax)
+        {
+            if (Attacking && enemy != null)
+            {
+                if (UnityEngine.Random.Range(0, 100) * Strength >= enemy.Defence)
+                {
+                    enemy.hp -= 1;
+                    if (enemy.hp <= 0)
+                    {
+                        Debug.Log(enemy.gameObject.name + " has been killed by " + gameObject.name);
+                        Attacking = false;
+                        enemy.gameObject.SetActive(false);
+                    }
+                }
+            }
         }
     }
 
@@ -110,8 +145,12 @@ public class Ant : MonoBehaviour
 
     public void Attack(Ant _enemy)
     {
-
+        enemy = _enemy;
+        Attacking = true;
+        _enemy.UnderAttack(this);
     }
+
+
 
     public void DepositObject()
     {
@@ -137,5 +176,11 @@ public class Ant : MonoBehaviour
 
     }
 
-    
+    public void UnderAttack(Ant _enemy)
+    {
+        Target = _enemy.transform;
+        Attacking = true;
+    }
+
+
 }

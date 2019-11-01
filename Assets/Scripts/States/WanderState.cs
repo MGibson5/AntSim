@@ -46,6 +46,12 @@ public class WanderState : BaseState
             return (typeof(ReturnState));
 
         }
+        //check if underattack
+        if(_ant.Attacking == true && _ant.Target != null)
+        {
+            destination = null;
+            return (typeof(AttackState));
+        }
         //CHECK ENEMIES (possibly do this along with food but move marked foods inbetween so marked foods is checked before finding new foods
         var target = CheckForTarget();
 
