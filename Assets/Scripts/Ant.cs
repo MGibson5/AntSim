@@ -44,11 +44,15 @@ public class Ant : MonoBehaviour
 
     public bool Attacking = false;
     private Ant enemy;
+
+    public AntSettings antSettings;
     private void Awake()
     {
         if (HomeColony == null) {
             HomeColony = FindObjectOfType<Colony>(); //TEMP FIND COLONY (Should be set when ant spawned)
+
         }
+        antSettings = HomeColony.gameObject.GetComponent<AntSettings>();
         Colony_Manager = FindObjectOfType<ColonyManager>();
         InitialiseStateMachine();
         hunger = maxHunger;
@@ -57,7 +61,6 @@ public class Ant : MonoBehaviour
         agent = gameObject.GetComponent<NavMeshAgent>();
 
         gameObject.GetComponent<Renderer>().material.SetColor("_Color", AntColour);
-
     }
 
     private void Update()
@@ -147,6 +150,7 @@ public class Ant : MonoBehaviour
     {
         enemy = _enemy;
         Attacking = true;
+        
         _enemy.UnderAttack(this);
     }
 
@@ -171,7 +175,7 @@ public class Ant : MonoBehaviour
     public void ChangeSpeed()
     {
         if(agent)
-            agent.speed = GameSettings.AntSpeed;
+            agent.speed = antSettings.antSpeed;
         
 
     }

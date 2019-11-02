@@ -28,7 +28,7 @@ public class CollectState : BaseState
         var Distance = Vector3.Distance(a: transform.position, b: _ant.Target.position);
         agent.destination = _ant.Target.position;
 
-        if (Distance <= GameSettings.CollectDist)
+        if (Distance <= _ant.antSettings.collectDist)
         {
             //PICK UP THING
             if (_ant.PickupObject(_ant.Target.gameObject.GetComponent<Food>().pickupModel))

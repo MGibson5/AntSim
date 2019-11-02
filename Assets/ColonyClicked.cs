@@ -7,7 +7,7 @@ public class ColonyClicked : OnClicked
     public GameObject ColonyHighlite;
     public GameObject ColonyUI;
     private Colony Colony;
-
+    [SerializeField] private Canvas canvas;
     [SerializeField] private TextMeshProUGUI ColonyTitle;
 
     [SerializeField] private TextMeshProUGUI FoodUI;
@@ -17,7 +17,7 @@ public class ColonyClicked : OnClicked
     [SerializeField] private TextMeshProUGUI SpeedText;
     [SerializeField] private TextMeshProUGUI SpawnRateText;
 
-
+    
 
     public override void Clicked()
     {
@@ -42,6 +42,7 @@ public class ColonyClicked : OnClicked
     void Start()
     {
         Colony = gameObject.GetComponent<Colony>();
+        
     }
 
     // Update is called once per frame

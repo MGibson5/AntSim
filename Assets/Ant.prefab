@@ -111,7 +111,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -148,10 +148,12 @@ MonoBehaviour:
   debugHunger: 0
   debugHP: 0
   hungerTickMax: 50
+  attackTickMax: 10
   AntColour: {r: 0, g: 0, b: 0, a: 0}
   Strength: 1
   Defence: 25
   Colony_Manager: {fileID: 0}
+  Attacking: 0
 --- !u!1 &3677970207189544519
 GameObject:
   m_ObjectHideFlags: 0

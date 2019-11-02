@@ -109,7 +109,7 @@ public class WanderState : BaseState
         float angle = 0;
         Vector3 noAngle = transform.forward;
 
-        for (int i = 0; i < GameSettings.SightRayAmount; i++)
+        for (int i = 0; i < _ant.antSettings.sightRayAmount; i++)
         {
             for (int j = 0; j < 2; j++)
             {
@@ -119,7 +119,7 @@ public class WanderState : BaseState
 
                 RaycastHit hit;
 
-                if (Physics.Raycast(transform.position, newVector, out hit, (GameSettings.SightDist + 1)))
+                if (Physics.Raycast(transform.position, newVector, out hit, (_ant.antSettings.sightDist + 1)))
                 {
                     if (hit.collider.GetComponent<Ant>())
                     {
@@ -141,11 +141,11 @@ public class WanderState : BaseState
                         return spotted.transform;
                     }
                     
-                    Debug.DrawRay(transform.position, newVector * (GameSettings.SightDist + 1), Color.yellow);
+                    Debug.DrawRay(transform.position, newVector * (_ant.antSettings.sightDist + 1), Color.yellow);
                 }
                 else
                 {
-                    Debug.DrawRay(transform.position, newVector * (GameSettings.SightDist + 1), Color.white);
+                    Debug.DrawRay(transform.position, newVector * (_ant.antSettings.sightDist + 1), Color.white);
 
                 }
 

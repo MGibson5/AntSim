@@ -19,7 +19,7 @@ public class ReturnState : BaseState
         if(moving == false)
             agent.destination = _ant.HomeColony.transform.position;
         float dist = Vector3.Distance(_ant.transform.position, _ant.HomeColony.transform.position);
-        if (dist  <= GameSettings.CollectDist)
+        if (dist  <= _ant.antSettings.collectDist)
         {
             _ant.DepositObject();
             _ant.SetTarget(null);

@@ -22,7 +22,7 @@ public class AttackState : BaseState
         var Distance = Vector3.Distance(a: transform.position, b: _ant.Target.position);
         agent.destination = _ant.Target.position;
 
-        if (Distance <= GameSettings.CollectDist)
+        if (Distance <= _ant.antSettings.collectDist)
         {
             if (_ant.Target)
             {
@@ -30,6 +30,7 @@ public class AttackState : BaseState
                 if (_ant.Target.gameObject.GetComponent<Ant>())
                 {
                     Ant _enemy = _ant.Target.gameObject.GetComponent<Ant>();
+                    
                     _ant.Attack(_enemy);
                 }
                 //set target home
