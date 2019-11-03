@@ -38,7 +38,9 @@ public class Colony : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ColonyName = ("Colony");
+        ColonyName = Name;
+        if(ColonyName == null)
+            ColonyName = ("Colony");
 
         AntColour = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
         Ants = new List<Ant>();

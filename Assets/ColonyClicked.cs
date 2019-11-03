@@ -6,8 +6,8 @@ public class ColonyClicked : OnClicked
 {
     public GameObject ColonyHighlite;
     public GameObject ColonyUI;
-    private Colony Colony;
-    [SerializeField] private Canvas canvas;
+    public Colony Colony;
+    [SerializeField]private AntSettings antSettings;
     [SerializeField] private TextMeshProUGUI ColonyTitle;
 
     [SerializeField] private TextMeshProUGUI FoodUI;
@@ -16,8 +16,6 @@ public class ColonyClicked : OnClicked
     [SerializeField] private TextMeshProUGUI SightText;
     [SerializeField] private TextMeshProUGUI SpeedText;
     [SerializeField] private TextMeshProUGUI SpawnRateText;
-
-    
 
     public override void Clicked()
     {
@@ -28,12 +26,11 @@ public class ColonyClicked : OnClicked
         FoodUI.text = Colony.food.ToString();
         PopUI.text = Colony.Ants.Count.ToString();
 
-        SightText.text = GameSettings.SightDist.ToString();
+        SightText.text = antSettings.sightDist.ToString();
     }
 
     public override void ClickOff()
     {
-        Debug.Log("DAWD");
         ColonyHighlite.SetActive(false);
         ColonyUI.SetActive(false);
     }
@@ -42,7 +39,7 @@ public class ColonyClicked : OnClicked
     void Start()
     {
         Colony = gameObject.GetComponent<Colony>();
-        
+        antSettings = gameObject.GetComponent<AntSettings>();
     }
 
     // Update is called once per frame
@@ -50,9 +47,9 @@ public class ColonyClicked : OnClicked
     {
         FoodUI.text = Colony.food.ToString();
         PopUI.text = Colony.Ants.Count.ToString();
-        SightText.text = GameSettings.SightDist.ToString();
-        SpeedText.text = GameSettings.AntSpeed.ToString();
-        SpawnRateText.text = GameSettings.AntSpawnRate.ToString();
+        SightText.text = antSettings.sightDist.ToString();
+        SpeedText.text = antSettings.antSpeed.ToString();
+        SpawnRateText.text = antSettings.antSpawnRate.ToString();
 
     }
 }
